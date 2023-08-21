@@ -156,6 +156,8 @@ fun TextView() {
 
 val annotatedText = buildAnnotatedString {
     append("点击 ")
+    // 此 *URL* 注释附加到以下内容
+    // 直到 `pop()` 被调用
     pushStringAnnotation(tag = "URL", annotation = "https://www.baidu.com")//开始标记
     withStyle(
         style = SpanStyle(
