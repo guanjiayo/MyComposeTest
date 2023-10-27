@@ -6,8 +6,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import zs.xmx.compose.ui.button.ButtonActivity
 import zs.xmx.compose.adapter.MainAdapter
 import zs.xmx.compose.model.MainItem
+import zs.xmx.compose.ui.TextFieldActivity
+import zs.xmx.compose.ui.TextViewActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     private fun initData() {
         items.add(MainItem("Text", "JetPack Compose 实现 TextView"))
         items.add(MainItem("TextField", "JetPack Compose 实现 EdiText"))
-
+        items.add(MainItem("Button", "JetPack Compose 实现 Button"))
     }
 
     private fun initAdapter() {
@@ -46,6 +49,7 @@ class MainActivity : AppCompatActivity() {
                 when (position) {
                     0 -> startActivity(Intent(this@MainActivity, TextViewActivity::class.java))
                     1 -> startActivity(Intent(this@MainActivity, TextFieldActivity::class.java))
+                    2 -> startActivity(Intent(this@MainActivity, ButtonActivity::class.java))
                 }
             }
         })

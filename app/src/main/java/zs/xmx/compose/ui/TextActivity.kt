@@ -1,4 +1,4 @@
-package zs.xmx.compose
+package zs.xmx.compose.ui
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
@@ -32,7 +32,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.R
-import zs.xmx.compose.ui.TextView
 import zs.xmx.compose.ui.theme.MyTestTheme
 
 class TextViewActivity : AppCompatActivity() {

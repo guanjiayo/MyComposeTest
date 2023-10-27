@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package zs.xmx.compose
+package zs.xmx.compose.ui
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
