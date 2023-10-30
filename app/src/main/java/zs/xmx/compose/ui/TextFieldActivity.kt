@@ -138,18 +138,18 @@ class TextFieldActivity : AppCompatActivity() {
 
         var simpleText by remember { mutableStateOf(TextFieldValue()) }
 
-        TextField(
-            value = simpleText,
+        TextField(value = simpleText,
             onValueChange = { simpleText = it },
             modifier = Modifier.fillMaxWidth(),
             label = { Text(text = "Enter text") },
             placeholder = { Text(text = "请输入文本!") },//hint
             //TextField 相关颜色属性都可以在这里设置
             //底部指示器和背景颜色设置为透明，实现看起来和EditText一样
-            colors = TextFieldDefaults.textFieldColors(
-                textColor = Color.White,//输入文本颜色
-                placeholderColor = Color.LightGray,//hint颜色
-                containerColor = Color.Black,//背景颜色
+            colors = TextFieldDefaults.colors(
+                focusedTextColor = Color.White,//输入文本颜色
+                unfocusedTextColor = Color.LightGray,//hint颜色
+                focusedContainerColor = Color.Black,
+                unfocusedContainerColor = Color.Black,//背景颜色
                 focusedIndicatorColor = Color.Red,//底部指示器几种状态的颜色
                 unfocusedIndicatorColor = Color.Green,
                 disabledIndicatorColor = Color.LightGray,//禁用
@@ -165,11 +165,11 @@ class TextFieldActivity : AppCompatActivity() {
                 //组件位置是固定的,建议只放一个
                 //Text(text = "文本")
                 Icon(imageVector = Icons.Filled.Face, null)
-            }, trailingIcon = { //接收@Composable 函数,在 TextField 添加组件
+            },
+            trailingIcon = { //接收@Composable 函数,在 TextField 添加组件
                 //组件位置是固定的,建议只放一个
                 Icon(imageVector = Icons.Filled.Settings, null)
-            }
-        )
+            })
     }
 
     @Composable
@@ -181,8 +181,7 @@ class TextFieldActivity : AppCompatActivity() {
 
         //自定义搜索框
         var searchText by remember { mutableStateOf("") }
-        BasicTextField(
-            value = searchText,
+        BasicTextField(value = searchText,
             onValueChange = { searchText = it },
             modifier = Modifier
                 .clip(RoundedCornerShape(8.dp))
@@ -277,24 +276,23 @@ class TextFieldActivity : AppCompatActivity() {
 
         var leadingIconText by remember { mutableStateOf("leadingIcon") }
 
-        OutlinedTextField(
-            value = leadingIconText, onValueChange = { leadingIconText = it },
+        OutlinedTextField(value = leadingIconText,
+            onValueChange = { leadingIconText = it },
             label = { Text(text = "LeadingIcon") },
             leadingIcon = { //接收@Composable 函数,在 TextField 添加组件
                 //组件位置是固定的,建议只放一个
                 //Text(text = "文本")
                 Icon(
-                    imageVector = Icons.Filled.Person,
-                    null
+                    imageVector = Icons.Filled.Person, null
                 )
-            }
-        )
+            })
 
         Spacer(modifier = Modifier.height(10.dp))
 
         var trailingIconText by remember { mutableStateOf("trailingIcon") }
 
-        TextField(value = trailingIconText, onValueChange = { trailingIconText = it },
+        TextField(value = trailingIconText,
+            onValueChange = { trailingIconText = it },
             label = { Text(text = "TrailingIcon") },
             trailingIcon = { //接收@Composable 函数,在 TextField 添加组件
                 //组件位置是固定的,建议只放一个
