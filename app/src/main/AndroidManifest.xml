@@ -31,6 +31,10 @@
         <activity android:name="zs.xmx.compose.ui.TextFieldActivity" />
         <activity android:name="zs.xmx.compose.ui.button.ButtonActivity" />
         <activity android:name="zs.xmx.compose.ui.image.ImageActivity" />
+        <activity android:name="zs.xmx.compose.ui.progress.ProgressActivity" />
+        <activity android:name="zs.xmx.compose.ui.seekbar.SliderActivity" />
+        <activity android:name="zs.xmx.compose.ui.switch.SwitchActivity" />
+        <activity android:name="zs.xmx.compose.ui.radiobutton.RadioButtonActivity" />
     </application>
 
 </manifest>

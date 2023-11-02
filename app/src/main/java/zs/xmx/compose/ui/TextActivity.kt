@@ -32,7 +32,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.R
-import zs.xmx.compose.ui.theme.MyTestTheme
+import zs.xmx.compose.theme.MyTestTheme
 
 class TextViewActivity : AppCompatActivity() {
 

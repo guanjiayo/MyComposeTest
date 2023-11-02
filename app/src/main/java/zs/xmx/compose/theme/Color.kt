@@ -1,4 +1,4 @@
-package zs.xmx.compose.ui.theme
+package zs.xmx.compose.theme
 
 import androidx.compose.ui.graphics.Color
 

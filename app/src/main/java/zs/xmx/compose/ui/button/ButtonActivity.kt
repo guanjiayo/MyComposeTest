@@ -30,7 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import zs.xmx.compose.ext.composeClick
-import zs.xmx.compose.ui.theme.MyTestTheme
+import zs.xmx.compose.theme.MyTestTheme
 
 class ButtonActivity : AppCompatActivity() {
 

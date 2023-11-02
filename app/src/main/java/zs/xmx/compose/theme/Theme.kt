@@ -1,4 +1,4 @@
-package zs.xmx.compose.ui.theme
+package zs.xmx.compose.theme
 
 import android.app.Activity
 import android.os.Build

@@ -54,7 +54,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import zs.xmx.compose.ui.theme.MyTestTheme
+import zs.xmx.compose.theme.MyTestTheme
 
 class TextFieldActivity : AppCompatActivity() {
 

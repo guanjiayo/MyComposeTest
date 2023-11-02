@@ -6,12 +6,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import zs.xmx.compose.ui.button.ButtonActivity
 import zs.xmx.compose.adapter.MainAdapter
 import zs.xmx.compose.model.MainItem
 import zs.xmx.compose.ui.TextFieldActivity
 import zs.xmx.compose.ui.TextViewActivity
+import zs.xmx.compose.ui.button.ButtonActivity
 import zs.xmx.compose.ui.image.ImageActivity
+import zs.xmx.compose.ui.progress.ProgressActivity
+import zs.xmx.compose.ui.radiobutton.RadioButtonActivity
+import zs.xmx.compose.ui.seekbar.SliderActivity
+import zs.xmx.compose.ui.switch.SwitchActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,6 +35,10 @@ class MainActivity : AppCompatActivity() {
         items.add(MainItem("TextField", "Android 原生 EdiText"))
         items.add(MainItem("Button", "Android 原生 Button"))
         items.add(MainItem("Image", "Android 原生 ImageView"))
+        items.add(MainItem("xxProgressIndicator", "Android 原生 ProgressBar"))
+        items.add(MainItem("Slider", "Android 原生 SeekBar"))
+        items.add(MainItem("Switch", "Android 原生 Switch"))
+        items.add(MainItem("RadioButton", "Android 原生 RadioButton"))
     }
 
     private fun initAdapter() {
@@ -53,6 +61,10 @@ class MainActivity : AppCompatActivity() {
                     1 -> startActivity(Intent(this@MainActivity, TextFieldActivity::class.java))
                     2 -> startActivity(Intent(this@MainActivity, ButtonActivity::class.java))
                     3 -> startActivity(Intent(this@MainActivity, ImageActivity::class.java))
+                    4 -> startActivity(Intent(this@MainActivity, ProgressActivity::class.java))
+                    5 -> startActivity(Intent(this@MainActivity, SliderActivity::class.java))
+                    6 -> startActivity(Intent(this@MainActivity, SwitchActivity::class.java))
+                    7 -> startActivity(Intent(this@MainActivity, RadioButtonActivity::class.java))
                 }
             }
         })
