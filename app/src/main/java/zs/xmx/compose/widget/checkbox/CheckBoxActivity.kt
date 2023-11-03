@@ -1,8 +1,7 @@
-package zs.xmx.compose.ui.radiobutton
+package zs.xmx.compose.widget.checkbox
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Column
@@ -16,16 +15,15 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
@@ -33,7 +31,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import zs.xmx.compose.theme.MyTestTheme
 
-class RadioButtonActivity : AppCompatActivity() {
+class CheckBoxActivity : AppCompatActivity() {
+    private val TAG = CheckBoxActivity::class.java.simpleName
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -42,14 +41,14 @@ class RadioButtonActivity : AppCompatActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
                 ) {
-                    RadioButtonSample()
+                    CheckBoxSample()
                 }
             }
         }
     }
 
     @Composable
-    fun RadioButtonSample() {
+    fun CheckBoxSample() {
         Column(
             modifier = Modifier
                 .padding(start = 10.dp, end = 10.dp)
@@ -60,8 +59,8 @@ class RadioButtonActivity : AppCompatActivity() {
             //基本使用
             BasicUse()
 
-            //Button左边带Icon
-            RadioGroup()
+            //模拟一组CheckBox,多选操作
+            CheckBoxGroup()
         }
 
     }
@@ -70,70 +69,65 @@ class RadioButtonActivity : AppCompatActivity() {
     private fun BasicUse() {
         Spacer(modifier = Modifier.height(10.dp))
         Text(text = "基本使用", fontWeight = FontWeight.Bold)
+        val checkedState = remember { mutableStateOf(true) }
+        Checkbox(checked = checkedState.value, onCheckedChange = { checkedState.value = it })
+    }
 
-        var state by remember { mutableStateOf(false) }
+    @Composable
+    private fun CheckBoxGroup() {
+        Spacer(modifier = Modifier.height(10.dp))
+        Divider(modifier = Modifier.fillMaxWidth())
 
-        RadioButton(selected = state, onClick = {
-            state = !state
+        Text(text = "CheckBoxGroup", fontWeight = FontWeight.Bold)
+
+        val checkItems = mutableListOf("Calls", "Missed", "Friends", "ZhangSan", "LiSi")
+        MyCheckBoxGroup(checkItems, onOptionSelected = {
+            Log.i(TAG, "CheckBoxGroup: $it")
+            //Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         })
 
     }
 
     @Composable
-    private fun RadioGroup() {
-        Spacer(modifier = Modifier.height(10.dp))
-        Divider(modifier = Modifier.fillMaxWidth())
-        Text(text = "RadioGroup", fontWeight = FontWeight.Bold)
-
-        val radioItems = listOf("Calls", "Missed", "Friends")
-
-        MyRadioGroup(
-            options = radioItems,
-            initialSelectedOption = radioItems[0],
-            onOptionSelected = {
-                Toast.makeText(this@RadioButtonActivity, it, Toast.LENGTH_SHORT).show()
-            })
-
-    }
-
-    @Composable
-    private fun MyRadioGroup(
-        options: List<String>,
-        initialSelectedOption: String,
-        onOptionSelected: (String) -> Unit,
-        modifier: Modifier = Modifier
+    private fun MyCheckBoxGroup(
+        options: List<String>, onOptionSelected: (String) -> Unit
     ) {
-        /*
-            selectedOption 当前选中的值
-            onOptionSelected  用于更新 mutableStateOf(radioItems[0])
-         */
-        val (selectedOption, setSelectedOption) = remember { mutableStateOf(initialSelectedOption) }
 
-        Column(modifier = modifier.selectableGroup()) {
+        val selectedOption = remember { mutableListOf<String>() }
+
+        Column(modifier = Modifier.selectableGroup()) {
+
             options.forEach { option ->
+                val isChecked = remember(option) { mutableStateOf(false) }
+
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(56.dp)
+                        .height(45.dp)
+                        .padding(horizontal = 4.dp)
                         .selectable(
-                            selected = (option == selectedOption),
-                            onClick = {
-                                setSelectedOption(option)
-                                onOptionSelected(option)
-                            },
-                            role = Role.RadioButton
-                        )
-                        .padding(horizontal = 16.dp),
-                    verticalAlignment = Alignment.CenterVertically
+                            selected = isChecked.value, onClick = {
+                                isChecked.value = !isChecked.value
+                            }, role = Role.Checkbox
+                        ), verticalAlignment = Alignment.CenterVertically
                 ) {
-                    RadioButton(
-                        selected = (option == selectedOption),
-                        onClick = null
+                    LaunchedEffect(isChecked.value) {
+                        if (isChecked.value) {
+                            selectedOption.add(option)
+                        } else {
+                            selectedOption.remove(option)
+                        }
+                        if (selectedOption.isNotEmpty()) {
+                            onOptionSelected(selectedOption.joinToString(","))
+                        }
+                    }
+                    Checkbox(
+                        checked = isChecked.value, onCheckedChange = null
                     )
                     Text(
                         text = option,
                         style = MaterialTheme.typography.bodyMedium.merge(),
-                        modifier = Modifier.padding(start = 16.dp)
+                        modifier = Modifier.padding(start = 8.dp)
                     )
                 }
             }

@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package zs.xmx.compose.ui.button
+package zs.xmx.compose.widget.button
 
 import android.os.Bundle
 import android.widget.Toast
@@ -112,7 +112,7 @@ class ButtonActivity : AppCompatActivity() {
 
         Button(
             onClick = composeClick {
-                Toast.makeText(ButtonActivity@ this, "点击了该按钮", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "点击了该按钮", Toast.LENGTH_SHORT).show()
             },
             elevation = null,
         ) {

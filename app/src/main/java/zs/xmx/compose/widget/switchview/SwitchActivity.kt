@@ -1,4 +1,4 @@
-package zs.xmx.compose.ui.switch
+package zs.xmx.compose.widget.switchview
 
 import android.os.Bundle
 import androidx.activity.compose.setContent

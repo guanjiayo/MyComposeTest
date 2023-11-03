@@ -1,4 +1,4 @@
-package zs.xmx.compose.ui
+package zs.xmx.compose.widget.text
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
