@@ -24,7 +24,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import zs.xmx.compose.theme.MyTestTheme
 
@@ -89,6 +92,15 @@ class SimpleLayoutActivity : AppCompatActivity() {
         Divider(modifier = Modifier.fillMaxWidth())
         Text(text = "Row 横向线性布局", fontWeight = FontWeight.Bold)
 
+        Text(modifier = Modifier.padding(bottom = 5.dp), text = buildAnnotatedString {
+            withStyle(style = SpanStyle(color = Color.Blue)) {
+                append("==> SpaceEvenly: ")
+            }
+            withStyle(style = SpanStyle(color = Color.Gray)) {
+                append("控件之间的间隔均分")
+            }
+        })
+
         /**
          *  SpaceEvenly 控件之间的间隔均分
          */
@@ -115,9 +127,18 @@ class SimpleLayoutActivity : AppCompatActivity() {
         }
 
         Spacer(modifier = Modifier.height(10.dp))
+        Text(modifier = Modifier.padding(bottom = 5.dp), text = buildAnnotatedString {
+            withStyle(style = SpanStyle(color = Color.Blue)) {
+                append("==> SpaceAround: ")
+            }
+            withStyle(style = SpanStyle(color = Color.Gray)) {
+                append("主轴上均匀分布,视觉上: #1##2##3#")
+            }
+        })
 
         /**
-         *  SpaceAround 控件将屏幕均分
+         *  SpaceAround 主轴上均匀分布
+         *  视觉上: #1##2##3#
          */
         Row(
             modifier = Modifier.fillMaxSize(),
@@ -142,6 +163,14 @@ class SimpleLayoutActivity : AppCompatActivity() {
         }
 
         Spacer(modifier = Modifier.height(10.dp))
+        Text(modifier = Modifier.padding(bottom = 5.dp), text = buildAnnotatedString {
+            withStyle(style = SpanStyle(color = Color.Blue)) {
+                append("==> SpaceBetween: ")
+            }
+            withStyle(style = SpanStyle(color = Color.Gray)) {
+                append("第一个和最后一个控件,紧贴屏幕,其余的控件的均分")
+            }
+        })
 
         /**
          *  SpaceBetween 第一个和最后一个控件,紧贴屏幕,其余的控件的均分
@@ -169,13 +198,24 @@ class SimpleLayoutActivity : AppCompatActivity() {
         }
 
         Spacer(modifier = Modifier.height(10.dp))
+        Text(modifier = Modifier.padding(bottom = 5.dp), text = buildAnnotatedString {
+            withStyle(style = SpanStyle(color = Color.Blue)) {
+                append("==> spacedBy: ")
+            }
+            withStyle(style = SpanStyle(color = Color.Gray)) {
+                append("控件紧贴在一起,可设置紧贴控件之间的间距")
+            }
+        })
 
         /**
          *  spacedBy 控件紧贴在一起,可设置紧贴控件之间的间距
          */
         Row(
             modifier = Modifier.fillMaxSize(),
-            horizontalArrangement = Arrangement.spacedBy(20.dp, alignment = Alignment.CenterHorizontally),
+            horizontalArrangement = Arrangement.spacedBy(
+                20.dp,
+                alignment = Alignment.CenterHorizontally
+            ),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Box(
@@ -203,6 +243,19 @@ class SimpleLayoutActivity : AppCompatActivity() {
         Divider(modifier = Modifier.fillMaxWidth())
         Text(text = "Box 帧布局", fontWeight = FontWeight.Bold)
 
+        Box {
+            Box(
+                modifier = Modifier
+                    .size(150.dp)
+                    .background(Color.Green)
+            )
+            Box(
+                modifier = Modifier
+                    .size(100.dp)
+                    .background(Color.Red)
+            )
+            Text(text = "Compose", color = Color.White)
+        }
 
     }
 

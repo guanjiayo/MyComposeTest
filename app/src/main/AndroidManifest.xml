@@ -38,6 +38,8 @@
         <activity android:name="zs.xmx.compose.widget.checkbox.CheckBoxActivity" />
         <activity android:name="zs.xmx.compose.widget.chip.ChipActivity" />
         <activity android:name="zs.xmx.compose.layout.SimpleLayoutActivity" />
+        <activity android:name="zs.xmx.compose.layout.FlowLayoutActivity" />
+        <activity android:name="zs.xmx.compose.layout.ScaffoldActivity" />
     </application>
 
 </manifest>

@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import zs.xmx.compose.adapter.MainAdapter
+import zs.xmx.compose.layout.FlowLayoutActivity
+import zs.xmx.compose.layout.ScaffoldActivity
 import zs.xmx.compose.layout.SimpleLayoutActivity
 import zs.xmx.compose.model.MainItem
 import zs.xmx.compose.widget.edittext.TextFieldActivity
@@ -45,6 +47,8 @@ class MainActivity : AppCompatActivity() {
         items.add(MainItem("CheckBox", "Android 原生 CheckBox"))
         items.add(MainItem("Chip", "Android 原生 CheckBox"))
         items.add(MainItem("简单布局", "Android 原生 线性布局、帧布局等"))
+        items.add(MainItem("FlowLayout", "Android 原生 FlowLayout流式布局"))
+        items.add(MainItem("Scaffold 脚手架", "Android 原生 AppCompatActivity,用于快速构建MD可视化布局结构"))
     }
 
     private fun initAdapter() {
@@ -74,6 +78,8 @@ class MainActivity : AppCompatActivity() {
                     8 -> startActivity(Intent(this@MainActivity, CheckBoxActivity::class.java))
                     9 -> startActivity(Intent(this@MainActivity, ChipActivity::class.java))
                     10 -> startActivity(Intent(this@MainActivity, SimpleLayoutActivity::class.java))
+                    11 -> startActivity(Intent(this@MainActivity, FlowLayoutActivity::class.java))
+                    12 -> startActivity(Intent(this@MainActivity, ScaffoldActivity::class.java))
                 }
             }
         })

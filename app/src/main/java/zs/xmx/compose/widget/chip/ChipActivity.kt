@@ -37,6 +37,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import zs.xmx.compose.theme.MyTestTheme
@@ -79,6 +80,8 @@ class ChipActivity : AppCompatActivity() {
 
             //建议条状标签
             SuggestionChipExample()
+
+            Note()
         }
 
     }
@@ -173,6 +176,15 @@ class ChipActivity : AppCompatActivity() {
             onClick = { Log.d(TAG, "Suggestion  chip") },
             label = { Text("Suggestion  chip") },
         )
+    }
+
+    @Composable
+    private fun Note() {
+        Spacer(modifier = Modifier.height(10.dp))
+        Divider(modifier = Modifier.fillMaxWidth())
+        Text(text = "Note: ", color = Color.Red, fontWeight = FontWeight.Bold)
+
+        Text(text = "Chip 自带上下间距,官方说法是增加可点击区域,可用 Modifier.height(32.dp)重写")
     }
 
 }
