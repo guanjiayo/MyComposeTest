@@ -39,7 +39,8 @@
         <activity android:name="zs.xmx.compose.widget.chip.ChipActivity" />
         <activity android:name="zs.xmx.compose.layout.SimpleLayoutActivity" />
         <activity android:name="zs.xmx.compose.layout.FlowLayoutActivity" />
-        <activity android:name="zs.xmx.compose.layout.ScaffoldActivity" />
+        <activity android:name="zs.xmx.compose.layout.scaffold.ScaffoldActivity" />
+        <activity android:name="zs.xmx.compose.layout.ConstraintLayoutActivity" />
     </application>
 
 </manifest>

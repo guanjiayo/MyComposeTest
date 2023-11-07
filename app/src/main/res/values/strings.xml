@@ -9,4 +9,7 @@
 炊煙裊裊昇起 隔江千萬里
 在瓶底書漢隸仿前朝的飄逸
 就當我為遇見妳伏筆</string>
+    <string name="tabBottom_home">Home</string>
+    <string name="tabBottom_favorite">Favorite</string>
+    <string name="tabBottom_setting">Settings</string>
 </resources>
