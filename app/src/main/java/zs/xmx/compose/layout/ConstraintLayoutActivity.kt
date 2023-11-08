@@ -17,8 +17,10 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ShapeDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,6 +30,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.painterResource
@@ -216,26 +219,96 @@ class ConstraintLayoutActivity : AppCompatActivity() {
         Divider(modifier = Modifier.fillMaxWidth())
         Text(text = "Chain使用示例", fontWeight = FontWeight.Bold)
 
+        Text(text = "Packed(紧贴)", modifier = Modifier.padding(top = 5.dp))
         ConstraintLayout(modifier = Modifier.fillMaxWidth()) {
-            val (text1, text2, text3) = createRefs()
-            createHorizontalChain(text1, text2, text2, chainStyle = ChainStyle.Spread)
+            val (btn1, btn2, btn3) = createRefs()
+            createHorizontalChain(btn1, btn2, btn3, chainStyle = ChainStyle.Packed)
 
-            Button(onClick = { /* Do something */ }, modifier = Modifier.constrainAs(text1) {
-                top.linkTo(parent.top, margin = 5.dp)
-            }) {
-                Text(text = "Button1")
+            Button(onClick = { /* Do something */ },
+                shape = RectangleShape,
+                modifier = Modifier.constrainAs(btn1) {
+                    top.linkTo(parent.top, margin = 5.dp)
+                }) {
+                Text(text = "A")
             }
 
-            Button(onClick = { /* Do something */ }, modifier = Modifier.constrainAs(text2) {
-                top.linkTo(parent.top, margin = 5.dp)
-            }) {
-                Text(text = "Button2")
+            Button(onClick = { /* Do something */ },
+                shape = RectangleShape,
+                modifier = Modifier.constrainAs(btn2) {
+                    top.linkTo(parent.top, margin = 5.dp)
+                }) {
+                Text(text = "B")
             }
 
-            Button(onClick = { /* Do something */ }, modifier = Modifier.constrainAs(text3) {
-                top.linkTo(parent.top, margin = 5.dp)
-            }) {
-                Text(text = "Button3")
+            Button(onClick = { /* Do something */ },
+                shape = RectangleShape,
+                modifier = Modifier.constrainAs(btn3) {
+                    top.linkTo(parent.top, margin = 5.dp)
+                }) {
+                Text(text = "C")
+            }
+        }
+
+        Text(text = "Spread(间隔均分)", modifier = Modifier.padding(top = 5.dp))
+        ConstraintLayout(modifier = Modifier.fillMaxWidth()) {
+            val (btn1, btn2, btn3) = createRefs()
+            createHorizontalChain(btn1, btn2, btn3, chainStyle = ChainStyle.Spread)
+
+            Button(onClick = { /* Do something */ },
+                shape = RectangleShape,
+                modifier = Modifier.constrainAs(btn1) {
+                    top.linkTo(parent.top, margin = 5.dp)
+                }) {
+                Text(text = "A")
+            }
+
+            Button(onClick = { /* Do something */ },
+                shape = RectangleShape,
+                modifier = Modifier.constrainAs(btn2) {
+                    top.linkTo(parent.top, margin = 5.dp)
+                }) {
+                Text(text = "B")
+            }
+
+            Button(onClick = { /* Do something */ },
+                shape = RectangleShape,
+                modifier = Modifier.constrainAs(btn3) {
+                    top.linkTo(parent.top, margin = 5.dp)
+                }) {
+                Text(text = "C")
+            }
+        }
+
+        Text(
+            text = "SpreadInside(第一个和最后一个贴边,再间隔均分)",
+            modifier = Modifier.padding(top = 5.dp)
+        )
+        ConstraintLayout(modifier = Modifier.fillMaxWidth()) {
+            val (btn1, btn2, btn3) = createRefs()
+            createHorizontalChain(btn1, btn2, btn3, chainStyle = ChainStyle.SpreadInside)
+
+            Button(onClick = { /* Do something */ },
+                shape = RectangleShape,
+                modifier = Modifier.constrainAs(btn1) {
+                    top.linkTo(parent.top, margin = 5.dp)
+                }) {
+                Text(text = "A")
+            }
+
+            Button(onClick = { /* Do something */ },
+                shape = RectangleShape,
+                modifier = Modifier.constrainAs(btn2) {
+                    top.linkTo(parent.top, margin = 5.dp)
+                }) {
+                Text(text = "B")
+            }
+
+            Button(onClick = { /* Do something */ },
+                shape = RectangleShape,
+                modifier = Modifier.constrainAs(btn3) {
+                    top.linkTo(parent.top, margin = 5.dp)
+                }) {
+                Text(text = "C")
             }
         }
 

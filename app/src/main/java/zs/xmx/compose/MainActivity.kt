@@ -18,6 +18,8 @@ import zs.xmx.compose.widget.button.ButtonActivity
 import zs.xmx.compose.widget.checkbox.CheckBoxActivity
 import zs.xmx.compose.widget.chip.ChipActivity
 import zs.xmx.compose.widget.image.ImageActivity
+import zs.xmx.compose.widget.list.LazyColumnActivity
+import zs.xmx.compose.widget.pager.PagerActivity
 import zs.xmx.compose.widget.progress.ProgressActivity
 import zs.xmx.compose.widget.radiobutton.RadioButtonActivity
 import zs.xmx.compose.widget.seekbar.SliderActivity
@@ -46,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         items.add(MainItem("Switch", "Android 原生 Switch"))
         items.add(MainItem("RadioButton", "Android 原生 RadioButton"))
         items.add(MainItem("CheckBox", "Android 原生 CheckBox"))
-        items.add(MainItem("Chip", "Android 原生 CheckBox"))
+        items.add(MainItem("Chip", "Android 原生 Chip"))
         items.add(MainItem("简单布局", "Android 原生 线性布局、帧布局等"))
         items.add(MainItem("FlowLayout", "Android 原生 FlowLayout流式布局"))
         items.add(
@@ -56,6 +58,8 @@ class MainActivity : AppCompatActivity() {
             )
         )
         items.add(MainItem("ConstraintLayout", "Android 原生 ConstraintLayout"))
+        items.add(MainItem("Pager", "Android 原生 ViewPager2"))
+        items.add(MainItem("LazyColumnActivity", "Android 原生 RecyclerView"))
     }
 
     private fun initAdapter() {
@@ -93,6 +97,9 @@ class MainActivity : AppCompatActivity() {
                             ConstraintLayoutActivity::class.java
                         )
                     )
+
+                    14 -> startActivity(Intent(this@MainActivity, PagerActivity::class.java))
+                    15 -> startActivity(Intent(this@MainActivity, LazyColumnActivity::class.java))
                 }
             }
         })

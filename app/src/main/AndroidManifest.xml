@@ -41,6 +41,8 @@
         <activity android:name="zs.xmx.compose.layout.FlowLayoutActivity" />
         <activity android:name="zs.xmx.compose.layout.scaffold.ScaffoldActivity" />
         <activity android:name="zs.xmx.compose.layout.ConstraintLayoutActivity" />
+        <activity android:name="zs.xmx.compose.widget.pager.PagerActivity" />
+        <activity android:name="zs.xmx.compose.widget.list.LazyColumnActivity" />
     </application>
 
 </manifest>
