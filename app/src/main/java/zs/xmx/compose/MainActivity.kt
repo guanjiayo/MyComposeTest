@@ -19,6 +19,7 @@ import zs.xmx.compose.widget.checkbox.CheckBoxActivity
 import zs.xmx.compose.widget.chip.ChipActivity
 import zs.xmx.compose.widget.image.ImageActivity
 import zs.xmx.compose.widget.list.LazyColumnActivity
+import zs.xmx.compose.widget.list.LazyVerticalStaggerActivity
 import zs.xmx.compose.widget.pager.PagerActivity
 import zs.xmx.compose.widget.progress.ProgressActivity
 import zs.xmx.compose.widget.radiobutton.RadioButtonActivity
@@ -59,7 +60,8 @@ class MainActivity : AppCompatActivity() {
         )
         items.add(MainItem("ConstraintLayout", "Android 原生 ConstraintLayout"))
         items.add(MainItem("Pager", "Android 原生 ViewPager2"))
-        items.add(MainItem("LazyColumnActivity", "Android 原生 RecyclerView"))
+        items.add(MainItem("LazyColumn", "Android 原生 RecyclerView"))
+        items.add(MainItem("LazyVerticalStaggeredGrid", "Android 原生 RecyclerView -- 瀑布流"))
     }
 
     private fun initAdapter() {
@@ -100,6 +102,12 @@ class MainActivity : AppCompatActivity() {
 
                     14 -> startActivity(Intent(this@MainActivity, PagerActivity::class.java))
                     15 -> startActivity(Intent(this@MainActivity, LazyColumnActivity::class.java))
+                    16 -> startActivity(
+                        Intent(
+                            this@MainActivity,
+                            LazyVerticalStaggerActivity::class.java
+                        )
+                    )
                 }
             }
         })

@@ -43,6 +43,7 @@
         <activity android:name="zs.xmx.compose.layout.ConstraintLayoutActivity" />
         <activity android:name="zs.xmx.compose.widget.pager.PagerActivity" />
         <activity android:name="zs.xmx.compose.widget.list.LazyColumnActivity" />
+        <activity android:name="zs.xmx.compose.widget.list.LazyVerticalStaggerActivity" />
     </application>
 
 </manifest>
