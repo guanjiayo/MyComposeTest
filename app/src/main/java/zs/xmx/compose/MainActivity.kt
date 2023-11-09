@@ -8,15 +8,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import zs.xmx.compose.adapter.MainAdapter
 import zs.xmx.compose.layout.ConstraintLayoutActivity
+import zs.xmx.compose.layout.CustomLayoutActivity
 import zs.xmx.compose.layout.FlowLayoutActivity
-import zs.xmx.compose.layout.scaffold.ScaffoldActivity
 import zs.xmx.compose.layout.SimpleLayoutActivity
+import zs.xmx.compose.layout.scaffold.ScaffoldActivity
 import zs.xmx.compose.model.MainItem
-import zs.xmx.compose.widget.edittext.TextFieldActivity
-import zs.xmx.compose.widget.text.TextViewActivity
+import zs.xmx.compose.widget.CustomViewActivity
 import zs.xmx.compose.widget.button.ButtonActivity
 import zs.xmx.compose.widget.checkbox.CheckBoxActivity
 import zs.xmx.compose.widget.chip.ChipActivity
+import zs.xmx.compose.widget.edittext.TextFieldActivity
 import zs.xmx.compose.widget.image.ImageActivity
 import zs.xmx.compose.widget.list.LazyColumnActivity
 import zs.xmx.compose.widget.list.LazyVerticalStaggerActivity
@@ -25,6 +26,7 @@ import zs.xmx.compose.widget.progress.ProgressActivity
 import zs.xmx.compose.widget.radiobutton.RadioButtonActivity
 import zs.xmx.compose.widget.seekbar.SliderActivity
 import zs.xmx.compose.widget.switchview.SwitchActivity
+import zs.xmx.compose.widget.text.TextViewActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -54,14 +56,15 @@ class MainActivity : AppCompatActivity() {
         items.add(MainItem("FlowLayout", "Android 原生 FlowLayout流式布局"))
         items.add(
             MainItem(
-                "Scaffold 脚手架",
-                "Android 原生 AppCompatActivity,用于快速构建MD可视化布局结构"
+                "Scaffold 脚手架", "Android 原生 AppCompatActivity,用于快速构建MD可视化布局结构"
             )
         )
         items.add(MainItem("ConstraintLayout", "Android 原生 ConstraintLayout"))
         items.add(MainItem("Pager", "Android 原生 ViewPager2"))
         items.add(MainItem("LazyColumn", "Android 原生 RecyclerView"))
         items.add(MainItem("LazyVerticalStaggeredGrid", "Android 原生 RecyclerView -- 瀑布流"))
+        items.add(MainItem("自定义View", "Compose 自定义View"))
+        items.add(MainItem("自定义布局", "Compose 自定义布局"))
     }
 
     private fun initAdapter() {
@@ -95,8 +98,7 @@ class MainActivity : AppCompatActivity() {
                     12 -> startActivity(Intent(this@MainActivity, ScaffoldActivity::class.java))
                     13 -> startActivity(
                         Intent(
-                            this@MainActivity,
-                            ConstraintLayoutActivity::class.java
+                            this@MainActivity, ConstraintLayoutActivity::class.java
                         )
                     )
 
@@ -104,10 +106,13 @@ class MainActivity : AppCompatActivity() {
                     15 -> startActivity(Intent(this@MainActivity, LazyColumnActivity::class.java))
                     16 -> startActivity(
                         Intent(
-                            this@MainActivity,
-                            LazyVerticalStaggerActivity::class.java
+                            this@MainActivity, LazyVerticalStaggerActivity::class.java
                         )
                     )
+
+                    17 -> startActivity(Intent(this@MainActivity, CustomViewActivity::class.java))
+                    18 -> startActivity(Intent(this@MainActivity, CustomLayoutActivity::class.java))
+
                 }
             }
         })

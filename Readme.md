@@ -6,6 +6,9 @@
 ## Modifier 修饰符
 
 > 可通过定义 val myModifier=Modifier.xxx 来实现类似 Android 原生抽取style,方便复用
+> 实际开发中建议: 
+>   1. 将Modifier抽取出去,当多个控件用同一个相同得修饰符,Compose会进行识别并优化
+>   2. 对于如LazyColum,多控件嵌套等场景,Modifier应用于更高层级得容器组件,性能会更好
 
 ### 设置控件尺寸
 
@@ -44,6 +47,8 @@
 ### 添加形状
 
 - shadow 
+
+
 
 
 

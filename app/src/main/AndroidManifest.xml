@@ -44,6 +44,8 @@
         <activity android:name="zs.xmx.compose.widget.pager.PagerActivity" />
         <activity android:name="zs.xmx.compose.widget.list.LazyColumnActivity" />
         <activity android:name="zs.xmx.compose.widget.list.LazyVerticalStaggerActivity" />
+        <activity android:name="zs.xmx.compose.layout.CustomLayoutActivity" />
+        <activity android:name="zs.xmx.compose.widget.CustomViewActivity" />
     </application>
 
 </manifest>

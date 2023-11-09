@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -55,25 +56,23 @@ class LazyVerticalStaggerActivity : AppCompatActivity() {
          *
          */
         LazyVerticalStaggeredGrid(
-            columns = StaggeredGridCells.Fixed(2)
+            columns = StaggeredGridCells.Fixed(2),
+            contentPadding = PaddingValues(5.dp),
+            verticalItemSpacing = 5.dp,
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             itemsIndexed(photos) { index, photo ->
                 if (index == 1) {
                     Image(
                         painter = painterResource(id = photo),
                         contentDescription = null,
-                        modifier = Modifier.padding(
-                            start = 5.dp,
-                            top = 15.dp,
-                            end = 5.dp,
-                            bottom = 5.dp
-                        )
+                        modifier = Modifier.padding(top = 15.dp)
                     )
                 } else {
                     Image(
                         painter = painterResource(id = photo),
                         contentDescription = null,
-                        modifier = Modifier.padding(5.dp)
+                        // modifier = Modifier.padding(5.dp)
                     )
                 }
             }

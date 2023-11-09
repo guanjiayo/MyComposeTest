@@ -62,7 +62,7 @@ class LazyColumnActivity : AppCompatActivity() {
             items(items = messages, key = { message ->
                 //给每个item添加id,防止状态丢失,key的值必须能存储到bundle
                 message.id!!
-            }) { message ->
+            }, contentType = { it.isMale }) { message ->
                 if (message.isMale) {
                     MaleMessage(msg = message)
                 } else {
@@ -80,6 +80,8 @@ class LazyColumnActivity : AppCompatActivity() {
 
     @Composable
     fun FemaleMessage(msg: Message, itemClick: (msg: Message) -> Unit) {
+        var isExpanded by remember { mutableStateOf(false) }
+
         Card(modifier = Modifier.padding(horizontal = 10.dp, vertical = 5.dp)) {
             Row(modifier = Modifier.padding(all = 8.dp)) {
                 Image(
@@ -91,8 +93,6 @@ class LazyColumnActivity : AppCompatActivity() {
                         .border(0.5.dp, Color.Black, CircleShape)
                 )
                 Spacer(modifier = Modifier.width(8.dp))
-
-                var isExpanded by remember { mutableStateOf(false) }
                 Column(modifier = Modifier.pointerInput(Unit) {
                     detectTapGestures(onTap = {
                         isExpanded = !isExpanded
@@ -113,6 +113,8 @@ class LazyColumnActivity : AppCompatActivity() {
 
     @Composable
     fun MaleMessage(msg: Message) {
+        var isExpanded by remember { mutableStateOf(false) }
+
         Card(
             modifier = Modifier.padding(horizontal = 10.dp, vertical = 5.dp),
             colors = CardDefaults.cardColors(containerColor = Color.Green)
@@ -122,7 +124,6 @@ class LazyColumnActivity : AppCompatActivity() {
                     .padding(all = 8.dp)
             ) {
 
-                var isExpanded by remember { mutableStateOf(false) }
                 Column(
                     modifier = Modifier
                         .weight(1f)
