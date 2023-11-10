@@ -6,7 +6,7 @@
 ## Modifier 修饰符
 
 > 可通过定义 val myModifier=Modifier.xxx 来实现类似 Android 原生抽取style,方便复用
-> 实际开发中建议: 
+> 实际开发中建议:
 >   1. 将Modifier抽取出去,当多个控件用同一个相同得修饰符,Compose会进行识别并优化
 >   2. 对于如LazyColum,多控件嵌套等场景,Modifier应用于更高层级得容器组件,性能会更好
 
@@ -46,10 +46,20 @@
 
 ### 添加形状
 
-- shadow 
+- shadow
 
+---
 
+## PathEffect Canvas的一些形状效果
 
+- cornerPathEffect
+  将线段之间的锐角替换为指定半径的圆角
+- dashPathEffect
+  以给定间距绘制一系列虚线,并将其便宜到指定间距数组中
+- chainPathEffect
+  创建将内部效果应用于路径的PathEffect,然后将外部效果应用于内部效果的结果
+- stampedPathEffect
+  通过指定一些特定的形状,并将其标记来绘制路径(只能设置笔触形状)
 
 
 
