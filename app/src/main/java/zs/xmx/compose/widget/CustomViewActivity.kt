@@ -26,6 +26,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
@@ -33,6 +34,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.ImageShader
+import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.PointMode
 import androidx.compose.ui.graphics.ShaderBrush
@@ -40,11 +42,21 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.drawscope.inset
+import androidx.compose.ui.graphics.drawscope.withTransform
 import androidx.compose.ui.res.imageResource
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.rememberTextMeasurer
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Constraints
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.toSize
 import zs.xmx.compose.R
 import zs.xmx.compose.theme.MyTestTheme
 
@@ -97,6 +109,20 @@ class CustomViewActivity : AppCompatActivity() {
             DrawHollowRoundRect()
             //绘制圆弧
             DrawArc()
+            //绘制空心圆弧
+            DrawHollowArc()
+            //DrawScope位置转换
+            DrawScopeTransform()
+            //绘制文本
+            DrawText()
+            //绘制测量文本
+            DrawMeasurerText()
+            //绘制图片
+            DrawImage()
+            //绘制路径
+            DrawPath()
+            //绘制贝塞尔曲线
+            DrawBezierPath()
         }
 
     }
@@ -241,7 +267,7 @@ class CustomViewActivity : AppCompatActivity() {
                  */
                 val linearBrush = Brush.linearGradient(
                     colors = listOf(
-                        Color.Red, Color.Green, Color.Blue
+                        Color.Red, Color.Blue
                     )
                 )
 
@@ -538,14 +564,220 @@ class CustomViewActivity : AppCompatActivity() {
         ) {
             Canvas(modifier = Modifier
                 .fillMaxWidth()
-                .height(120.dp), onDraw = {
+                .height(80.dp), onDraw = {
                 drawArc(
                     color = Color.Red,
-                    size= Size(200f,200f),
-                    startAngle = 0f,
-                    sweepAngle = 90f,
-                    useCenter = true
+                    size = Size(200f, 200f),
+                    startAngle = 30f,
+                    sweepAngle = 300f,
+                    useCenter = true//边界中心,是否连接中心点的意思
                 )
+            })
+        }
+
+    }
+
+    @Composable
+    private fun DrawHollowArc() {
+        Spacer(modifier = Modifier.height(10.dp))
+        Divider()
+        Text(text = "绘制空心圆弧", fontWeight = FontWeight.Bold)
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight(),
+            contentAlignment = Alignment.TopCenter
+        ) {
+            Canvas(modifier = Modifier
+                .fillMaxWidth()
+                .height(80.dp), onDraw = {
+                drawArc(
+                    color = Color.Red,
+                    size = Size(200f, 200f),
+                    startAngle = 90f,
+                    sweepAngle = 150f,
+                    useCenter = false,//边界中心,是否连接中心点的意思
+                    style = Stroke(width = 10f)
+                )
+            })
+        }
+
+    }
+
+    @Composable
+    private fun DrawScopeTransform() {
+        Spacer(modifier = Modifier.height(10.dp))
+        Divider()
+        Text(text = "DrawScope位置转换", fontWeight = FontWeight.Bold)
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight(),
+            contentAlignment = Alignment.TopCenter
+        ) {
+            Canvas(modifier = Modifier
+                .fillMaxWidth()
+                .height(80.dp), onDraw = {
+                //修改DrawScope的左右/上下 margin边距
+                inset(horizontal = 50f, vertical = 30f) {
+                    withTransform({
+                        //ps:以下参数可单独在Canvas的onDraw{}代码块中单独使用
+                        //向右平移1/5屏幕
+                        translate(left = size.width / 5F)
+                        //旋转45度
+                        rotate(degrees = 45F)
+                        //缩放: scaleX 增大0.8倍, scaleY 增大1.5倍
+                        scale(scaleX = 0.8f, scaleY = 1.5f)
+                    }) {
+                        drawRect(
+                            color = Color.Gray,
+                            topLeft = Offset(x = size.width / 3F, y = size.height / 3F),
+                            size = size / 3F
+                        )
+                    }
+                }
+            })
+        }
+
+    }
+
+    @Composable
+    private fun DrawText() {
+        Spacer(modifier = Modifier.height(10.dp))
+        Divider()
+        Text(text = "绘制文本", fontWeight = FontWeight.Bold)
+        val textMeasurer = rememberTextMeasurer()
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight(),
+            contentAlignment = Alignment.TopCenter
+        ) {
+            Canvas(modifier = Modifier
+                .fillMaxWidth()
+                .height(30.dp), onDraw = {
+                drawText(textMeasurer, "Hello JetPack Compose!!!")
+            })
+        }
+
+    }
+
+    @Composable
+    private fun DrawMeasurerText() {
+        Spacer(modifier = Modifier.height(10.dp))
+        Divider()
+        Text(text = "DrawScope 绘制测量文本", fontWeight = FontWeight.Bold)
+        val textMeasurer = rememberTextMeasurer()
+        Spacer(
+            /**
+             * 因为绘制文本是一项成本较高的操作,在绘制区域的大小发生变化之前，使用 drawWithCache 将有助于缓存创建的对象
+             */
+            modifier = Modifier
+                .drawWithCache {
+                    val measuredText =
+                        textMeasurer.measure(
+                            AnnotatedString(
+                                "素胚勾勒出青花 筆鋒濃轉淡,瓶身描繪的牡丹 一如妳初妝,冉冉檀香透過窗心事我了然,宣紙上走筆至此擱一半,釉色渲染仕女圖 韻味被私藏"
+                            ),
+                            constraints = Constraints.fixedWidth((size.width).toInt()),
+                            overflow = TextOverflow.Ellipsis,
+                            style = TextStyle(fontSize = 18.sp)
+                        )
+
+                    onDrawWithContent {
+                        drawRect(Color.LightGray, size = measuredText.size.toSize())
+                        drawText(measuredText)
+                    }
+                }
+                .fillMaxSize()
+                .height(100.dp))
+
+    }
+
+    @Composable
+    private fun DrawImage() {
+        Spacer(modifier = Modifier.height(10.dp))
+        Divider()
+        Text(text = "绘制图片", fontWeight = FontWeight.Bold)
+        val dogImage = ImageBitmap.imageResource(id = R.drawable.dog)
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(150.dp),
+            contentAlignment = Alignment.TopCenter
+        ) {
+            Canvas(modifier = Modifier
+                .fillMaxWidth(), onDraw = {
+
+                drawImage(
+                    image = dogImage,
+                    srcOffset = IntOffset(0, 0),//设置源图的位置
+                    srcSize = IntSize(474, 355),//设置源图的宽高
+                    dstOffset = IntOffset(100, 50),//给srcXX设置过属性的图片再设置偏移量
+                    dstSize = IntSize(500, 350),//给srcXX设置过属性的图片再设置宽高
+                )
+            })
+        }
+
+    }
+
+    @Composable
+    private fun DrawPath() {
+        Spacer(modifier = Modifier.height(10.dp))
+        Divider()
+        Text(text = "绘制路径", fontWeight = FontWeight.Bold)
+
+        val path = Path()
+        path.moveTo(100f, 220f)
+        path.lineTo(100f, 620f)
+        path.lineTo(800f, 620f)
+        path.lineTo(900f, 220f)
+        path.lineTo(600f, 20f)
+        path.close()
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(250.dp),
+            contentAlignment = Alignment.TopCenter
+        ) {
+            Canvas(modifier = Modifier
+                .fillMaxWidth(), onDraw = {
+
+                drawPath(path = path, color = Color.Red, style = Stroke(width = 10f))
+
+            })
+        }
+
+    }
+
+    @Composable
+    private fun DrawBezierPath() {
+        Spacer(modifier = Modifier.height(10.dp))
+        Divider()
+        Text(text = "绘制贝塞尔曲线", fontWeight = FontWeight.Bold)
+
+        val path = Path()
+        path.moveTo(100f, 220f)
+        path.lineTo(100f, 620f)
+        path.quadraticBezierTo(800f, 700f, 600f, 100f)//二阶贝塞尔曲线
+        path.cubicTo(700f, 200f, 800f, 400f, 100f, 100f)//三阶贝塞尔曲线
+        path.close()
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(250.dp),
+            contentAlignment = Alignment.TopCenter
+        ) {
+            Canvas(modifier = Modifier
+                .fillMaxWidth(), onDraw = {
+
+                drawPath(path = path, color = Color.Red, style = Stroke(width = 10f))
+
             })
         }
 
