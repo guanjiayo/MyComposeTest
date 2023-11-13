@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import zs.xmx.compose.adapter.MainAdapter
+import zs.xmx.compose.animation.AnimationActivity
 import zs.xmx.compose.layout.ConstraintLayoutActivity
 import zs.xmx.compose.layout.CustomLayoutActivity
 import zs.xmx.compose.layout.FlowLayoutActivity
@@ -65,6 +66,7 @@ class MainActivity : AppCompatActivity() {
         items.add(MainItem("LazyVerticalStaggeredGrid", "Android 原生 RecyclerView -- 瀑布流"))
         items.add(MainItem("自定义View", "Compose 自定义View"))
         items.add(MainItem("自定义布局", "Compose 自定义布局"))
+        items.add(MainItem("动画", "Compose 动画"))
     }
 
     private fun initAdapter() {
@@ -112,6 +114,7 @@ class MainActivity : AppCompatActivity() {
 
                     17 -> startActivity(Intent(this@MainActivity, CustomViewActivity::class.java))
                     18 -> startActivity(Intent(this@MainActivity, CustomLayoutActivity::class.java))
+                    19 -> startActivity(Intent(this@MainActivity, AnimationActivity::class.java))
 
                 }
             }

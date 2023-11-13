@@ -46,6 +46,7 @@
         <activity android:name="zs.xmx.compose.widget.list.LazyVerticalStaggerActivity" />
         <activity android:name="zs.xmx.compose.layout.CustomLayoutActivity" />
         <activity android:name="zs.xmx.compose.widget.CustomViewActivity" />
+        <activity android:name="zs.xmx.compose.animation.AnimationActivity" />
     </application>
 
 </manifest>
