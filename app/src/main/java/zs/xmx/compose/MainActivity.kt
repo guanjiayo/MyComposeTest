@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import zs.xmx.compose.adapter.MainAdapter
-import zs.xmx.compose.animation.AnimationActivity
+import zs.xmx.compose.animation.CustomAnimationActivity
+import zs.xmx.compose.animation.HighLevelAnimationActivity
+import zs.xmx.compose.animation.LowLevelAnimationActivity
 import zs.xmx.compose.layout.ConstraintLayoutActivity
 import zs.xmx.compose.layout.CustomLayoutActivity
 import zs.xmx.compose.layout.FlowLayoutActivity
@@ -66,7 +68,9 @@ class MainActivity : AppCompatActivity() {
         items.add(MainItem("LazyVerticalStaggeredGrid", "Android 原生 RecyclerView -- 瀑布流"))
         items.add(MainItem("自定义View", "Compose 自定义View"))
         items.add(MainItem("自定义布局", "Compose 自定义布局"))
-        items.add(MainItem("动画", "Compose 动画"))
+        items.add(MainItem("高级别动画", "Compose 可见性动画、布局大小动画、布局切换动画"))
+        items.add(MainItem("低级别动画", "Compose 属性动画、帧动画、多动画组合"))
+        items.add(MainItem("自定义动画", "AnimationSpec 、AnimationVector 使用"))
     }
 
     private fun initAdapter() {
@@ -114,7 +118,23 @@ class MainActivity : AppCompatActivity() {
 
                     17 -> startActivity(Intent(this@MainActivity, CustomViewActivity::class.java))
                     18 -> startActivity(Intent(this@MainActivity, CustomLayoutActivity::class.java))
-                    19 -> startActivity(Intent(this@MainActivity, AnimationActivity::class.java))
+                    19 -> startActivity(
+                        Intent(
+                            this@MainActivity, HighLevelAnimationActivity::class.java
+                        )
+                    )
+
+                    20 -> startActivity(
+                        Intent(
+                            this@MainActivity, LowLevelAnimationActivity::class.java
+                        )
+                    )
+
+                    21 -> startActivity(
+                        Intent(
+                            this@MainActivity, CustomAnimationActivity::class.java
+                        )
+                    )
 
                 }
             }

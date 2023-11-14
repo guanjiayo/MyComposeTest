@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandIn
 import androidx.compose.animation.shrinkOut
@@ -45,7 +46,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import zs.xmx.compose.theme.MyTestTheme
 
-class AnimationActivity : AppCompatActivity() {
+class HighLevelAnimationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -61,7 +62,7 @@ class AnimationActivity : AppCompatActivity() {
     }
 
     @Composable
-    fun AnimationSample() {
+    private fun AnimationSample() {
         Column(
             modifier = Modifier
                 .padding(start = 10.dp, end = 10.dp)
@@ -71,8 +72,8 @@ class AnimationActivity : AppCompatActivity() {
         ) {
             //可见性动画
             AnimVisibilityExample()
-            //todo 监听可见性动画当前状态
-
+            //可见性动画状态监听
+            AnimVisibilityStateListenerExample()
             //布局大小动画
             ContentSizeAnimExample()
             //布局切换动画
@@ -110,6 +111,47 @@ class AnimationActivity : AppCompatActivity() {
     }
 
     @Composable
+    private fun AnimVisibilityStateListenerExample() {
+        Spacer(modifier = Modifier.height(10.dp))
+        Divider(modifier = Modifier.fillMaxWidth())
+        Text(text = "AnimatedVisibility 可见性动画状态监听", fontWeight = FontWeight.Bold)
+
+        val state = remember {
+            MutableTransitionState(false).apply {
+                // Start the animation immediately.
+                targetState = true
+            }
+        }
+
+        AnimatedVisibility(visibleState = state,
+            enter = slideIn { IntOffset(400, 400) } + expandIn(),
+            exit = slideOut { IntOffset(400, 400) } + shrinkOut()) {
+            Text(
+                "天青色等烟雨 而我在等你,炊烟袅袅升起 隔江千万里, 在瓶底书汉隶仿前朝的飘逸," + "就当我为遇见你伏笔,天青色等烟雨 而我在等你,月色被打捞起," + "晕开了结局,如传世的青花瓷自顾自美丽,你眼带笑意",
+                Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+            )
+        }
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = when {
+                state.isIdle && state.currentState -> "State:   Visible"
+                !state.isIdle && state.currentState -> "State:   Disappearing"
+                state.isIdle && !state.currentState -> "State:   Invisible"
+                else -> "State:   Appearing"
+            }
+        )
+        Button(onClick = { state.targetState = !state.targetState }) {
+            Text(text = "可见性动画状态监听")
+        }
+    }
+
+    /**
+     * animateContentSize 在修饰符链中的位置顺序很重要。为了确保流畅的动画，请务必将其放置在任何大小修饰符
+     * （如 size 或 defaultMinSize）前面，以确保 animateContentSize 会将带动画效果的值的变化报告给布局。
+     */
+    @Composable
     private fun ContentSizeAnimExample() {
         Spacer(modifier = Modifier.height(10.dp))
         Divider(modifier = Modifier.fillMaxWidth())
@@ -141,7 +183,7 @@ class AnimationActivity : AppCompatActivity() {
     private fun CrossFadeAnimExample() {
         Spacer(modifier = Modifier.height(10.dp))
         Divider(modifier = Modifier.fillMaxWidth())
-        Text(text = "布局切换动画", fontWeight = FontWeight.Bold)
+        Text(text = "Crossfade 布局切换动画", fontWeight = FontWeight.Bold)
 
         var flag by remember { mutableStateOf(false) }
         Crossfade(
