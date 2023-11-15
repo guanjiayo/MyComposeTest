@@ -6,7 +6,6 @@ import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.animation.Animatable
-import androidx.compose.animation.Crossfade
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
@@ -15,6 +14,7 @@ import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.background
@@ -41,7 +41,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
@@ -84,7 +83,6 @@ class LowLevelAnimationActivity : AppCompatActivity() {
             UpdateTransitionExample()
             //组合动画重复执行
             InfiniteTransitionExample()
-
         }
 
     }
@@ -158,7 +156,14 @@ class LowLevelAnimationActivity : AppCompatActivity() {
 
         var boxState: BoxState by remember { mutableStateOf(BoxState.Small) }
         val transition = updateTransition(targetState = boxState, label = "updateTransition")
-        val color by transition.animateColor(label = "color") {
+        val color by transition.animateColor(transitionSpec = {
+            //添加过渡动画
+            when {
+                BoxState.Small isTransitioningTo BoxState.Large -> spring(stiffness = 50f)
+
+                else -> tween(durationMillis = 500)
+            }
+        }, label = "color") {
             boxState.color
         }
         val size by transition.animateDp(label = "size") {
@@ -195,11 +200,8 @@ class LowLevelAnimationActivity : AppCompatActivity() {
 
         val infiniteTransition = rememberInfiniteTransition(label = "infinite")
         val color by infiniteTransition.animateColor(
-            initialValue = Color.Red,
-            targetValue = Color.Green,
-            animationSpec = infiniteRepeatable(
-                animation = tween(1000, easing = LinearEasing),
-                repeatMode = RepeatMode.Reverse
+            initialValue = Color.Red, targetValue = Color.Green, animationSpec = infiniteRepeatable(
+                animation = tween(1000, easing = LinearEasing), repeatMode = RepeatMode.Reverse
             ), label = "infinite"
         )
 
@@ -214,15 +216,16 @@ class LowLevelAnimationActivity : AppCompatActivity() {
      * 密封类确保类型安全
      */
     private sealed class BoxState(
-        val color: Color,
-        val size: Dp,
-        val offset: Dp,
-        val angle: Float
+        val color: Color, val size: Dp, val offset: Dp, val angle: Float
     ) {
         //对"!"操作符重载
         operator fun not() = if (this is Small) Large else Small
 
         object Small : BoxState(Color.Blue, 60.dp, 20.dp, 0f)
         object Large : BoxState(Color.Red, 90.dp, 50.dp, 45f)
+    }
+
+    private enum class BoxState2 {
+        Collapsed, Expanded
     }
 }

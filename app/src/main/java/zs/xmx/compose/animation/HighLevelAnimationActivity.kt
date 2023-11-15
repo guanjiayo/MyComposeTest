@@ -123,7 +123,7 @@ class HighLevelAnimationActivity : AppCompatActivity() {
             }
         }
 
-        AnimatedVisibility(visibleState = state,
+        AnimatedVisibility(visibleState = state,//targetState
             enter = slideIn { IntOffset(400, 400) } + expandIn(),
             exit = slideOut { IntOffset(400, 400) } + shrinkOut()) {
             Text(

@@ -38,7 +38,9 @@
 ### 设置控件间距
 
 - padding
-  内边距
+    1. 先设置 padding 再设置 background ,效果类似 margin
+    2. 先设置 background 再设置 padding ,效果类似 padding
+    3. 同时支持先设置 padding,再设置 background , 最后再设置padding 的方式
 
 ### 添加点击事件
 

@@ -49,6 +49,8 @@
         <activity android:name="zs.xmx.compose.animation.HighLevelAnimationActivity" />
         <activity android:name="zs.xmx.compose.animation.LowLevelAnimationActivity" />
         <activity android:name="zs.xmx.compose.animation.CustomAnimationActivity" />
+        <activity android:name="zs.xmx.compose.gesture.ClickableActivity" />
+        <activity android:name="zs.xmx.compose.gesture.ScrollableActivity" />
     </application>
 
 </manifest>

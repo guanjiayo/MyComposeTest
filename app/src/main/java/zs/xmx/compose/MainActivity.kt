@@ -10,6 +10,8 @@ import zs.xmx.compose.adapter.MainAdapter
 import zs.xmx.compose.animation.CustomAnimationActivity
 import zs.xmx.compose.animation.HighLevelAnimationActivity
 import zs.xmx.compose.animation.LowLevelAnimationActivity
+import zs.xmx.compose.gesture.ClickableActivity
+import zs.xmx.compose.gesture.ScrollableActivity
 import zs.xmx.compose.layout.ConstraintLayoutActivity
 import zs.xmx.compose.layout.CustomLayoutActivity
 import zs.xmx.compose.layout.FlowLayoutActivity
@@ -71,6 +73,8 @@ class MainActivity : AppCompatActivity() {
         items.add(MainItem("高级别动画", "Compose 可见性动画、布局大小动画、布局切换动画"))
         items.add(MainItem("低级别动画", "Compose 属性动画、帧动画、多动画组合"))
         items.add(MainItem("自定义动画", "AnimationSpec 、AnimationVector 使用"))
+        items.add(MainItem("点击手势", "Compose 手势监听---点击事件"))
+        items.add(MainItem("滑动手势", "Compose 手势监听---滑动事件"))
     }
 
     private fun initAdapter() {
@@ -133,6 +137,18 @@ class MainActivity : AppCompatActivity() {
                     21 -> startActivity(
                         Intent(
                             this@MainActivity, CustomAnimationActivity::class.java
+                        )
+                    )
+
+                    22 -> startActivity(
+                        Intent(
+                            this@MainActivity, ClickableActivity::class.java
+                        )
+                    )
+
+                    23 -> startActivity(
+                        Intent(
+                            this@MainActivity, ScrollableActivity::class.java
                         )
                     )
 
