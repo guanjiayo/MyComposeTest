@@ -19,7 +19,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -31,6 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import zs.xmx.compose.R
+import zs.xmx.compose.theme.MyFontFamily
 
 
 /**
@@ -73,14 +73,14 @@ fun TextView() {
             text = stringResource(id = R.string.tv_hello),
             fontSize = 30.sp,
             color = Color.Blue,
-            fontFamily = myFontFamily, fontWeight = FontWeight.Bold
+            fontFamily = MyFontFamily, fontWeight = FontWeight.Bold
         )
 
         Text(
             text = stringResource(id = R.string.tv_hello),
             fontSize = 25.sp,
             color = Color.DarkGray,
-            fontFamily = myFontFamily, fontWeight = FontWeight.Light,
+            fontFamily = MyFontFamily, fontWeight = FontWeight.Light,
             letterSpacing = 5.sp//字间距
         )
 
@@ -170,12 +170,6 @@ val annotatedText = buildAnnotatedString {
     pop()//结束标记
     append(" 链接")
 }
-
-val myFontFamily = FontFamily(
-    Font(R.font.oswald_bold, FontWeight.Bold),
-    Font(R.font.oswald_light, FontWeight.Light),
-    Font(R.font.oswald_regular, FontWeight.Normal)
-)
 
 @Preview(showBackground = true)
 @Composable

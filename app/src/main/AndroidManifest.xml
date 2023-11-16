@@ -15,10 +15,13 @@
         android:theme="@style/Theme.MyTest"
         tools:targetApi="31">
         <activity
-            android:name="zs.xmx.compose.widget.text.TextViewActivity"
+            android:name=".exchange.NativeActivity"
             android:exported="false" />
         <activity
-            android:name="zs.xmx.compose.MainActivity"
+            android:name=".widget.text.TextViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.MyTest">
@@ -28,29 +31,31 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="zs.xmx.compose.widget.edittext.TextFieldActivity" />
-        <activity android:name="zs.xmx.compose.widget.button.ButtonActivity" />
-        <activity android:name="zs.xmx.compose.widget.image.ImageActivity" />
-        <activity android:name="zs.xmx.compose.widget.progress.ProgressActivity" />
-        <activity android:name="zs.xmx.compose.widget.seekbar.SliderActivity" />
-        <activity android:name="zs.xmx.compose.widget.switchview.SwitchActivity" />
-        <activity android:name="zs.xmx.compose.widget.radiobutton.RadioButtonActivity" />
-        <activity android:name="zs.xmx.compose.widget.checkbox.CheckBoxActivity" />
-        <activity android:name="zs.xmx.compose.widget.chip.ChipActivity" />
-        <activity android:name="zs.xmx.compose.layout.SimpleLayoutActivity" />
-        <activity android:name="zs.xmx.compose.layout.FlowLayoutActivity" />
-        <activity android:name="zs.xmx.compose.layout.scaffold.ScaffoldActivity" />
-        <activity android:name="zs.xmx.compose.layout.ConstraintLayoutActivity" />
-        <activity android:name="zs.xmx.compose.widget.pager.PagerActivity" />
-        <activity android:name="zs.xmx.compose.widget.list.LazyColumnActivity" />
-        <activity android:name="zs.xmx.compose.widget.list.LazyVerticalStaggerActivity" />
-        <activity android:name="zs.xmx.compose.layout.CustomLayoutActivity" />
-        <activity android:name="zs.xmx.compose.widget.CustomViewActivity" />
-        <activity android:name="zs.xmx.compose.animation.HighLevelAnimationActivity" />
-        <activity android:name="zs.xmx.compose.animation.LowLevelAnimationActivity" />
-        <activity android:name="zs.xmx.compose.animation.CustomAnimationActivity" />
-        <activity android:name="zs.xmx.compose.gesture.ClickableActivity" />
-        <activity android:name="zs.xmx.compose.gesture.ScrollableActivity" />
+        <activity android:name=".widget.edittext.TextFieldActivity" />
+        <activity android:name=".widget.button.ButtonActivity" />
+        <activity android:name=".widget.image.ImageActivity" />
+        <activity android:name=".widget.progress.ProgressActivity" />
+        <activity android:name=".widget.seekbar.SliderActivity" />
+        <activity android:name=".widget.switchview.SwitchActivity" />
+        <activity android:name=".widget.radiobutton.RadioButtonActivity" />
+        <activity android:name=".widget.checkbox.CheckBoxActivity" />
+        <activity android:name=".widget.chip.ChipActivity" />
+        <activity android:name=".layout.SimpleLayoutActivity" />
+        <activity android:name=".layout.FlowLayoutActivity" />
+        <activity android:name=".layout.scaffold.ScaffoldActivity" />
+        <activity android:name=".layout.ConstraintLayoutActivity" />
+        <activity android:name=".widget.pager.PagerActivity" />
+        <activity android:name=".widget.list.LazyColumnActivity" />
+        <activity android:name=".widget.list.LazyVerticalStaggerActivity" />
+        <activity android:name=".layout.CustomLayoutActivity" />
+        <activity android:name=".widget.CustomViewActivity" />
+        <activity android:name=".animation.HighLevelAnimationActivity" />
+        <activity android:name=".animation.LowLevelAnimationActivity" />
+        <activity android:name=".animation.CustomAnimationActivity" />
+        <activity android:name=".gesture.GestureActivity" />
+        <activity android:name=".gesture.ScrollableActivity" />
+        <activity android:name="zs.xmx.compose.exchange.ComposeActivity" />
+        <activity android:name="zs.xmx.compose.exchange.NativeUseCustomComposeViewActivity" />
     </application>
 
 </manifest>

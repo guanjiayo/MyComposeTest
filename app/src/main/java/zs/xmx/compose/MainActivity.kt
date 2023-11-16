@@ -10,7 +10,10 @@ import zs.xmx.compose.adapter.MainAdapter
 import zs.xmx.compose.animation.CustomAnimationActivity
 import zs.xmx.compose.animation.HighLevelAnimationActivity
 import zs.xmx.compose.animation.LowLevelAnimationActivity
-import zs.xmx.compose.gesture.ClickableActivity
+import zs.xmx.compose.exchange.ComposeActivity
+import zs.xmx.compose.exchange.NativeActivity
+import zs.xmx.compose.exchange.NativeUseCustomComposeViewActivity
+import zs.xmx.compose.gesture.GestureActivity
 import zs.xmx.compose.gesture.ScrollableActivity
 import zs.xmx.compose.layout.ConstraintLayoutActivity
 import zs.xmx.compose.layout.CustomLayoutActivity
@@ -73,8 +76,15 @@ class MainActivity : AppCompatActivity() {
         items.add(MainItem("高级别动画", "Compose 可见性动画、布局大小动画、布局切换动画"))
         items.add(MainItem("低级别动画", "Compose 属性动画、帧动画、多动画组合"))
         items.add(MainItem("自定义动画", "AnimationSpec 、AnimationVector 使用"))
-        items.add(MainItem("点击手势", "Compose 手势监听---点击事件"))
-        items.add(MainItem("滑动手势", "Compose 手势监听---滑动事件"))
+        items.add(MainItem("常见手势", "Compose 手势监听---点击、手势偏移量、拖动、滑动、多点触控事件"))
+        items.add(MainItem("嵌套滑动", "Compose 嵌套滑动"))
+        items.add(MainItem("Android 原生 调用 Compose", "xml、Fragment中调用Compose"))
+        items.add(MainItem("Compose 调用 原生Android控件", "原生控件、复杂控件、自定义控件等"))
+        items.add(
+            MainItem(
+                "Android 原生直接调用Compose封装好的控件或页面", "Native xml使用的 自定义ComposeView"
+            )
+        )
     }
 
     private fun initAdapter() {
@@ -142,13 +152,31 @@ class MainActivity : AppCompatActivity() {
 
                     22 -> startActivity(
                         Intent(
-                            this@MainActivity, ClickableActivity::class.java
+                            this@MainActivity, GestureActivity::class.java
                         )
                     )
 
                     23 -> startActivity(
                         Intent(
                             this@MainActivity, ScrollableActivity::class.java
+                        )
+                    )
+
+                    24 -> startActivity(
+                        Intent(
+                            this@MainActivity, NativeActivity::class.java
+                        )
+                    )
+
+                    25 -> startActivity(
+                        Intent(
+                            this@MainActivity, ComposeActivity::class.java
+                        )
+                    )
+
+                    26 -> startActivity(
+                        Intent(
+                            this@MainActivity, NativeUseCustomComposeViewActivity::class.java
                         )
                     )
 
