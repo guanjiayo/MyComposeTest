@@ -1,52 +1,57 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package zs.xmx.compose.exchange
 
-import android.os.Bundle
+import android.annotation.SuppressLint
+import android.content.Context
+import android.util.AttributeSet
 import android.util.Log
 import android.webkit.WebView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.material3.Divider
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.AbstractComposeView
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
-import com.dylanc.viewbinding.binding
-import zs.xmx.compose.databinding.ActivityNativeUseComposeBinding
 
-class NativeUseCustomComposeViewActivity : AppCompatActivity() {
-
-    private val mBinding by binding<ActivityNativeUseComposeBinding>()
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        mBinding.pageComposeWebview.setContent {
-            WebViewPage()
-        }
-
+class AndroidWebViewPage @JvmOverloads constructor(
+    context: Context, attrs: AttributeSet? = null
+) : AbstractComposeView(context, attrs) {
+    @Composable
+    override fun Content() {
+        WebViewPage()
     }
 
+    @OptIn(ExperimentalMaterial3Api::class)
+    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     @Composable
     private fun WebViewPage() {
-        Spacer(modifier = Modifier.height(10.dp))
-        Divider(modifier = Modifier.fillMaxWidth())
-        Text(text = "复杂控件--需要和页面生命周期联动的", fontWeight = FontWeight.Bold)
-
         val webView = rememberWebViewWithLifecycle()
-        AndroidView(factory = { webView }, update = {
-            //设置支持JavaScript
-            val webSetting = it.settings
-            webSetting.javaScriptEnabled = true
-            webView.loadUrl("https://www.baidu.com")
-        })
+        Scaffold(topBar = {
+            TopAppBar(title = { Text(text = "WebView 测试") }, navigationIcon = {
+                IconButton(onClick = { Log.e("WebViewPage", "WebViewPage: 点击返回按钮") }) {
+                    Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null)
+                }
+            })
+        }) {
+            AndroidView(factory = { webView }, update = {
+                //设置支持JavaScript
+                val webSetting = it.settings
+                webSetting.javaScriptEnabled = true
+                webView.loadUrl("https://www.baidu.com")
+            })
+        }
     }
 
     @Composable
